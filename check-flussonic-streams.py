@@ -11,7 +11,7 @@ parser=argparse.ArgumentParser(description='Checks for flussonic servers')
 parser.add_argument("-H", "--host", help="flussonic host, e.g. 1.2.3.4", type=str)
 parser.add_argument("-l", "--login", help="login for flussonic api", type=str, default='flussonic')
 parser.add_argument("-p", "--password", help="password for flussonic api", type=str, default='letmein!')
-parser.add_argument("--max_failed_streams_percent", help="how much streams could be in the failed state", type=int, default=70)
+parser.add_argument("--max_failed_streams_percent", help="percent of streams, that could be in the failed state", type=int, default=70)
 parser.add_argument("--timeout", type=int, default=10)
 
 

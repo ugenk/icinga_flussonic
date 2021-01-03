@@ -1,7 +1,7 @@
 check-flussonic
 ===============
 
-Nagios/Icinga plugin to check flussonic state.
+Nagios/Icinga plugin to check flussonic state and monitor amount of alive streams. Problem is reported in case of flussonic general failure, or if % of alive streams less then configured.
 
 Requirements
 ------------
