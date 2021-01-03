@@ -48,11 +48,8 @@ object CheckCommand "check_flussonic_streams" {
 
 add it to your streamer hosts
 ```
-template Host "streamer" {
+template Host "flussonic" {
     import "generic-host"
-    vars.notification["mail"] = {
-        groups = [ "icingaadmins" ]
-    }
     vars.streamer_host = name
     vars.api_user = "admin"
     vars.api_password = "password"
@@ -65,7 +62,7 @@ apply Service "flussonic_streams" {
 }
 
 object Host "flussonic1.example.com" {
-    import "streamer"
+    import "flussonic"
     address = "flussonic1.example.com"
 }
 ```
