@@ -56,7 +56,7 @@ if args.host:
                     gpu_mem_usage_str += 'GPU%i Memory used: %i%%, ' % (device['id'], int(device['memUsed']/device['memTotal']*100))
                     gpu_mem_usage_str_tech += 'gpu%i_mem_free=%i gpu%i_mem_total=%i gpu%i_mem_used=%i ' % (device['id'], device['memFree'], device['id'], device['memTotal'], device['id'], device['memUsed'])
 
-        return_str = 'Total streams = %i, Live streams = %i %s| total_streams=%i live_streams=%i total_clients=%i %s' % (data['total_streams'], data['online_streams'], gpu_mem_usage_str, data['total_streams'], data['online_streams'], data['total_clients'], gpu_mem_usage_str_tech)
+        return_str = 'Total streams = %i, Live streams = %i, %s| total_streams=%i live_streams=%i total_clients=%i %s' % (data['total_streams'], data['online_streams'], gpu_mem_usage_str, data['total_streams'], data['online_streams'], data['total_clients'], gpu_mem_usage_str_tech)
 
         # checking amount of alive streams
         if data['online_streams'] / data['total_streams'] * 100 < args.max_failed_streams_percent:
