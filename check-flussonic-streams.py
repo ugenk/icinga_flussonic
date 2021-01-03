@@ -12,6 +12,7 @@ parser.add_argument("-H", "--host", help="flussonic host, e.g. 1.2.3.4", type=st
 parser.add_argument("-l", "--login", help="login for flussonic api", type=str, default='flussonic')
 parser.add_argument("-p", "--password", help="password for flussonic api", type=str, default='letmein!')
 parser.add_argument("--max_failed_streams_percent", help="percent of streams, that could be in the failed state", type=int, default=70)
+parser.add_argument("--max_used_gpu_memory", help="maximum percentage of used gpu memory")
 parser.add_argument("--timeout", type=int, default=10)
 
 
@@ -46,12 +47,24 @@ if args.host:
         except ValueError as e:
             print('CRITICAL - Failed to parse JSON response from flussonic: %s', e.reason)
             sys.exit(2)
+        # doing logical tests
+        # checking GPUs memory
+        gpu_mem_usage_str = gpu_mem_usage_str_tech = ''
+        if len(data['transcoder_devices']) > 0:
+            for device in data['transcoder_devices']:
+                if device['type'] == 'nvenc':
+                    gpu_mem_usage_str += 'GPU%i Memory used: %i%%, ' % (device['id'], int(device['memUsed']/device['memTotal']*100))
+                    gpu_mem_usage_str_tech += 'gpu%i_mem_free=%i gpu%i_mem_total=%i gpu%i_mem_used=%i ' % (device['id'], device['memFree'], device['id'], device['memTotal'], device['id'], device['memUsed'])
+
+        return_str = 'Total streams = %i, Live streams = %i %s| total_streams=%i live_streams=%i total_clients=%i %s' % (data['total_streams'], data['online_streams'], gpu_mem_usage_str, data['total_streams'], data['online_streams'], data['total_clients'], gpu_mem_usage_str_tech)
+
+        # checking amount of alive streams
         if data['online_streams'] / data['total_streams'] * 100 < args.max_failed_streams_percent:
-            print('CRITICAL - Too much failed streams: %i', data['online_streams'])
+            print('CRITICAL - Too much failed streams: %i, %s', data['online_streams'], return_str)
             sys.exit(2)
-        else:
-            print('OK: Total streams = %i, Live streams = %i | total_streams=%i live_streams=%i' % (data['total_streams'], data['online_streams'], data['total_streams'], data['online_streams']))
-            sys.exit(0)
+
+        print('OK: ' + return_str)
+        sys.exit(0)
 
 else:
     print("UNKOWN - something went wrong")
