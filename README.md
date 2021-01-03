@@ -15,7 +15,7 @@ Define command in icinga config:
 
 ```
 object CheckCommand "check_flussonic_streams" {
-	command = [ PluginDir + "/check-hls.py" ]
+	command = [ PluginDir + "/check-flussonic-streams.py" ]
         arguments = {
                 "-H" = {
                         value = "$streamer_host$"
