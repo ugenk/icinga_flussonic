@@ -13,7 +13,7 @@ parser.add_argument('-l', '--login', help='login for flussonic api', type=str, d
 parser.add_argument('-p', '--password', help='password for flussonic api', type=str, default='letmein!')
 parser.add_argument('--max_failed_streams_percent', help='percent of streams, that could be in the failed state',
                     type=int, default=70)
-parser.add_argument('--max_used_gpu_memory', help='maximum percentage of used gpu memory')
+parser.add_argument('--max_used_gpu_memory', help='maximum percentage of used gpu memory', default=70)
 parser.add_argument('--timeout', type=int, default=10)
 
 
@@ -60,8 +60,9 @@ if args.host:
                                               (device['id'], device['memFree'], device['id'], device['memTotal'],
                                                device['id'], device['memUsed'])
 
-        return_str = 'Total streams = %i, Live streams = %i, Total clients = %i, %s| total_streams=%i live_streams=%i ' \
-                     'total_clients=%i cpu_usage=%i memory_usage=%i scheduler_load=%i input_kbit=%i output_kbit=%i %s' \
+        return_str = 'Total streams = %i, Live streams = %i, Total clients = %i, %s | total_streams=%i ' \
+                     'live_streams=%i total_clients=%i cpu_usage=%i memory_usage=%i scheduler_load=%i input_kbit=%i ' \
+                     'output_kbit=%i %s' \
                      % (data['total_streams'], data['online_streams'], data['total_clients'], gpu_mem_usage_str,
                         data['total_streams'], data['online_streams'], data['total_clients'], data['cpu_usage'],
                         data['memory_usage'], data['scheduler_load'], data['input_kbit'], data['output_kbit'],

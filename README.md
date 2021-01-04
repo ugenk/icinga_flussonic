@@ -16,33 +16,33 @@ Define command in icinga config:
 ```
 object CheckCommand 'check_flussonic_streams' {
 	command = [ PluginDir + '/check-flussonic-streams.py' ]
-		arguments = {
-			'-H' = {
-				value = '$streamer_host$'
-				required = true
-				description = 'host'
-			}
-			'-l' = {
-				value = '$api_user$'
-				required = false
-				description = 'API Login'
-			}
-			'-p' = {
-				value = '$api_password$'
-				required = false
-				description = 'API Password'
-			}
-			'--max_failed_streams_percent' = {
-				value = '$max_failed_streams_percent$'
-				required = false
-				description = 'Max Failed Streams in percent'
-			}
-			'--timeout' = {
-				value = '$timeout$'
-				required = false
-				description = 'HTTP Timeout'
-			}
+	arguments = {
+		'-H' = {
+			value = '$streamer_host$'
+			required = true
+			description = 'host'
 		}
+		'-l' = {
+			value = '$api_user$'
+			required = false
+			description = 'API Login'
+		}
+		'-p' = {
+			value = '$api_password$'
+			required = false
+			description = 'API Password'
+		}
+		'--max_failed_streams_percent' = {
+			value = '$max_failed_streams_percent$'
+			required = false
+			description = 'Max Failed Streams in percent'
+		}
+		'--timeout' = {
+			value = '$timeout$'
+			required = false
+			description = 'HTTP Timeout'
+		}
+	}
 }
 ```
 
