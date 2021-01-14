@@ -41,7 +41,7 @@ if args.host:
         sys.exit(2)
     except urllib.error.URLError as e:
         print('CRITICAL - We failed to reach a server. Reason: %s', e.reason)
-        sys.exit(2) 
+        sys.exit(2)
     else:
         try:
             data = json.loads(response.read().decode())
@@ -70,7 +70,7 @@ if args.host:
 
         # checking amount of alive streams
         if data['online_streams'] / data['total_streams'] * 100 < args.max_failed_streams_percent:
-            print('CRITICAL - Too much failed streams: %i, %s', data['online_streams'], return_str)
+            print('CRITICAL - Too much failed streams: %i, %s' % (data['online_streams'], return_str))
             sys.exit(2)
 
         print('OK: %s' % return_str)
