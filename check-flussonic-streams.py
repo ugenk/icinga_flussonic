@@ -71,7 +71,6 @@ def parse_response(response):
 
 if args.host:
     url = '%s://%s/streamer/api/v3/config/stats' % (proto, args.host)
-    print(url)
     req = urllib.request.Request(url)
     if args.login and args.password:
         b64auth = base64.standard_b64encode(('%s:%s' % (args.login, args.password)).encode('utf-8'))
