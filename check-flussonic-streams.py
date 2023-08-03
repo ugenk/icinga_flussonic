@@ -26,7 +26,7 @@ proto = 'http'  # TODO: add proto selection and https support
 args = parser.parse_args()
 
 if args.host:
-    url = '%s://%s/flussonic/api/server' % (proto, args.host)
+    url = '%s://%s/streamer/api/v3/config/stats' % (proto, args.host)
     req = urllib.request.Request(url)
     if args.login and args.password:
         b64auth = base64.standard_b64encode(('%s:%s' % (args.login, args.password)).encode('utf-8'))
