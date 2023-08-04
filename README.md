@@ -42,6 +42,11 @@ object CheckCommand 'check_flussonic_streams' {
 			required = false
 			description = 'HTTP Timeout'
 		}
+		'--ssl' = {
+		    value = '$use_https$'
+		    required = false
+		    description = 'Use HTTPS for flussonic api connection'
+		}
 	}
 }
 ```
@@ -53,6 +58,7 @@ template Host 'flussonic' {
 	vars.streamer_host = name
 	vars.api_user = 'admin'
 	vars.api_password = 'password'
+	vars.use_https = true
 }
 
 apply Service 'flussonic_streams' {
